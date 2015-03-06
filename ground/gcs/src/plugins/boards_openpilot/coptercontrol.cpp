@@ -143,9 +143,9 @@ bool CopterControl::setInputOnPort(enum InputType type, int port_num)
         settings.RcvrPort = HwCopterControl::RCVRPORT_PWM;
         break;
     case INPUT_TYPE_PPM:
-	/* Break from the past; for new builds pick a default that will
-	 * work with OneShot/SyncPWM. */
-        settings.RcvrPort = HwCopterControl::RCVRPORT_PPMONPIN8;
+        settings.RcvrPort = HwCopterControl::RCVRPORT_PPM;
+        settings.MainPort = HwCopterControl::MAINPORT_TELEMETRY;
+        settings.FlexiPort = HwCopterControl::FLEXIPORT_DISABLED;
         break;
     case INPUT_TYPE_SBUS:
         settings.MainPort = HwCopterControl::MAINPORT_SBUS;
@@ -153,9 +153,6 @@ bool CopterControl::setInputOnPort(enum InputType type, int port_num)
         break;
     case INPUT_TYPE_DSM:
         settings.FlexiPort = HwCopterControl::FLEXIPORT_DSM;
-        break;
-    case INPUT_TYPE_HOTTSUMD:
-        settings.FlexiPort = HwCopterControl::FLEXIPORT_HOTTSUMD;
         break;
     default:
         return false;
@@ -189,8 +186,6 @@ enum Core::IBoardType::InputType CopterControl::getInputOnPort(int port_num)
     switch(settings.FlexiPort) {
     case HwCopterControl::FLEXIPORT_DSM:
         return INPUT_TYPE_DSM;
-    case HwCopterControl::FLEXIPORT_HOTTSUMD:
-        return INPUT_TYPE_HOTTSUMD;
     default:
         break;
     }
@@ -203,7 +198,6 @@ enum Core::IBoardType::InputType CopterControl::getInputOnPort(int port_num)
     }
 
     switch(settings.RcvrPort) {
-    case HwCopterControl::RCVRPORT_PPMONPIN8:
     case HwCopterControl::RCVRPORT_PPM:
         return INPUT_TYPE_PPM;
     case HwCopterControl::RCVRPORT_PWM:
