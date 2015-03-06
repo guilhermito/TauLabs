@@ -79,7 +79,8 @@ UAVTalk::UAVTalk(QIODevice* iodev, UAVObjectManager* objMngr)
     connect(io, SIGNAL(readyRead()), this, SLOT(processInputStream()));
     ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
     Core::Internal::GeneralSettings * settings=pm->getObject<Core::Internal::GeneralSettings>();
-    useUDPMirror=settings->useUDPMirror();
+    if(settings)
+        useUDPMirror=settings->useUDPMirror();
     UAVTALK_QXTLOG_DEBUG(QString("[uavtalk.cpp  ] Use UDP:%0").arg(useUDPMirror));
     if(useUDPMirror)
     {
