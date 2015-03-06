@@ -101,6 +101,8 @@ void TelemetryManager::onDisconnect()
 
 void TelemetryManager::onGeneralSettingsChanged()
 {
+    if(!settings)
+        return;
     if (!settings->useSessionManaging())
     {
         foreach(UAVObjectManager::ObjectMap map, objMngr->getObjects())
