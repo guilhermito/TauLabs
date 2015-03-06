@@ -106,7 +106,7 @@ TelemetryMonitor::~TelemetryMonitor() {
     // Before saying goodbye, set the GCS connection status to disconnected too:
     GCSTelemetryStats::DataFields gcsStats = gcsStatsObj->getData();
     gcsStats.Status = GCSTelemetryStats::STATUS_DISCONNECTED;
-    if (settings->useSessionManaging())
+    if (settings && settings->useSessionManaging())
     {
         foreach(UAVObjectManager::ObjectMap map, objMngr->getObjects())
         {
@@ -653,7 +653,7 @@ void TelemetryMonitor::processStatsUpdates()
         qDebug() << "Connection with the autopilot established";
         ExtensionSystem::PluginManager* pm = ExtensionSystem::PluginManager::instance();
         Core::Internal::GeneralSettings * settings=pm->getObject<Core::Internal::GeneralSettings>();
-        if (!settings->useSessionManaging())
+        if (settings && !settings->useSessionManaging())
         {
             sessionFallback();
         }
@@ -672,7 +672,7 @@ void TelemetryMonitor::processStatsUpdates()
         connectionStatus = CON_DISCONNECTED;
         ExtensionSystem::PluginManager* pm = ExtensionSystem::PluginManager::instance();
         Core::Internal::GeneralSettings * settings=pm->getObject<Core::Internal::GeneralSettings>();
-        if (settings->useSessionManaging())
+        if (settings && settings->useSessionManaging())
         {
             foreach(UAVObjectManager::ObjectMap map, objMngr->getObjects())
             {
