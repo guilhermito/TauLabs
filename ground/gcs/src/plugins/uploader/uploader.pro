@@ -3,9 +3,9 @@ TARGET = Uploader
 DEFINES += UPLOADER_LIBRARY
 QT += svg widgets
 include(uploader_dependencies.pri)
-include(../../libs/glc_lib/glc_lib.pri)
+LIBS *= -l$$qtLibraryName(QUAZIP_lib)
 
-INCLUDEPATH *= ../../libs/glc_lib
+INCLUDEPATH *= ../../libs/quazip
 HEADERS += uploadergadget.h \
     uploadergadgetfactory.h \
     uploadergadgetwidget.h \
