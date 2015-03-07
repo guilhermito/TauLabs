@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWidget</class>
+ <widget class="QWidget" name="MainWidget">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>618</width>
+    <height>599</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>18</number>
+   </property>
+   <property name="topMargin">
+    <number>19</number>
+   </property>
+   <property name="rightMargin">
+    <number>19</number>
+   </property>
+   <property name="bottomMargin">
+    <number>19</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="font">
+      <font>
+       <family>Mukti Narrow</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border: 2px solid #2e2e30;
+	background: #232126;
+ }
+
+ QTabWidget::tab-bar {
+     left: 5px; /* move to the right by 5px */
+     alignment: center;
+
+ }
+
+ /* Style the tab using the tab sub-control. Note that
+     it reads QTabBar _not_ QTabWidget */
+ QTabBar::tab {
+     border: 1px solid #2e2e30;
+     border-bottom-color: #232126; /* same as the pane color */
+     border-top-left-radius: 4px;
+     border-top-right-radius: 4px;
+     min-width: 8ex;
+	padding:2px;
+ }
+
+QTabBar::tab:hover {
+	color: #f9d100;
+ }
+
+ QTabBar::tab:selected {
+	color: #f9d100;
+     background: #232126;
+     border-color: #9B9B9B;
+     border-bottom-color: #232126; /* same as pane color */
+
+ }
+QTabBar::tab:!selected:!hover {
+color: rgb(255, 255, 255);     
+}
+
+ QTabBar::tab:!selected {
+
+    background: transparent;
+     border-color: #0f0f0f;
+     border-bottom-color: #0f0f0f; /* same as pane color */
+     margin-top: 2px; /* make non-selected tabs look smaller */
+ }
+QLabel[white = true]
+{
+color: rgb(255, 255, 255);
+font: 11pt &quot;Mukti Narrow&quot;;
+}
+QLabel[yellow = true]
+{
+color: #f9d100;
+font: 11pt &quot;Mukti Narrow&quot;;
+}
+QLabel[isChannelNumber = true]
+{
+border-style: solid;
+border-width: 1px;
+	border-color: rgb(203, 203, 203);
+	font: 12pt &quot;Mukti Narrow&quot;;
+	width:30px;
+	height:30px;
+}
+QLabel::disabled[isChannelNumber = true]
+{
+	border-color: rgb(59, 59, 62);
+	background-color: rgb(59, 59, 62);
+	color: #2d2d2f;
+}
+QLabel::!disabled[isChannelNumber = true][active = true]
+{
+	background-color: #0f0f0f;
+	color: rgb(249, 209, 0);
+}
+QLabel::!disabled[isChannelNumber = true][active = false]
+{
+	color: #232126;
+	background-color: rgb(71, 174, 101);
+}
+
+
+QLabel[isChannelLabel = true]
+{
+	font: 11pt &quot;Mukti Narrow&quot;;
+	margin-left:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+QLabel::disabled[isChannelLabel = true]
+{
+	color: #2d2d2f;
+}
+QLabel::!disabled[isChannelLabel = true][active = true]
+{
+	color: rgb(249, 209, 0);
+}
+QLabel::!disabled[isChannelLabel = true][active = false]
+{
+	color: rgb(71, 174, 101);
+}
+
+QLabel[isChannelPercentage = true]
+{
+	font: 11pt &quot;Mukti Narrow&quot;;
+	margin-left:3px;
+}
+QLabel::disabled[isChannelPercentage = true]
+{
+	color: #2d2d2f;
+}
+QLabel::!disabled[isChannelPercentage = true][active = true]
+{
+	color: rgb(249, 209, 0);
+}
+QLabel::!disabled[isChannelPercentage = true][active = false]
+{
+	color: rgb(71, 174, 101);
+}
+
+QCheckBox[isReversedCheckbox = true] {
+     spacing: 5px;
+	font: 10pt &quot;Mukti Narrow&quot;;
+
+ }
+ QCheckBox::indicator[isReversedCheckbox = true] {
+     width: 18px;
+     height: 18px;
+ }
+ QCheckBox::indicator:unchecked[active = true][isReversedCheckbox = true] {
+     image: url(:/images/resources/checkboxactiveunchecked.png);
+ }
+ QCheckBox::indicator:checked[active = true][isReversedCheckbox = true] {
+     image: url(:/images/resources/checkboxactivechecked.png);
+ }
+QCheckBox::indicator:unchecked[active = false][isReversedCheckbox = true] {
+     image: url(:/images/resources/checkboxinactiveunchecked.png);
+ }
+ QCheckBox::indicator:checked[active = false][isReversedCheckbox = true] {
+     image: url(:/images/resources/checkboxinactivechecked.png);
+ }
+ QCheckBox[active = true][isReversedCheckbox = true] {
+	color: rgb(250, 209, 0);
+ }
+QCheckBox[active = false][isReversedCheckbox = true] {
+	color:rgb(69, 173, 99);
+ }
+QCheckBox[disabled=true][isReversedCheckbox = true] {
+	color:#2d2d2f;
+}
+QCheckBox::indicator:unchecked[disabled=true][isReversedCheckbox = true] {
+     image: url(:/images/resources/checkboxdisabledunchecked.png);
+ }
+QCheckBox::indicator:checked[disabled=true][isReversedCheckbox = true] {
+     image: url(:/images/resources/checkboxdisabledchecked.png);
+ }
+
+
+QSlider::handle[disabled=false][active = true]
+ {
+	image: url(:/images/resources/sliderball3.png);
+}
+QSlider::handle[disabled=false][active = false]
+ {
+	image: url(:/images/resources/sliderballgreen.png);
+}
+QSlider::groove[disabled=false]
+{
+
+    border-radius: 4px;
+	background: url(:/images/resources/groove.png)  center center repeat-x;
+}
+QSlider::groove[disabled=true]
+{
+    border-radius: 4px;
+	background: url(:/images/resources/groovedisabled.png)  center center repeat-x;
+}
+
+QComboBox
+{
+	font: 10pt &quot;Mukti Narrow&quot;;
+	height:20px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+QComboBox::enabled {
+	background-color: rgb(0, 0, 0);
+	border-color: rgb(170, 170, 255);
+	color: rgb(255, 255, 255);
+}
+QComboBox::disabled
+{
+	border-color: rgb(59, 59, 62);
+	background-color: rgb(59, 59, 62);
+	color: #2d2d2f;
+}
+QComboBox::drop-down
+{
+	border-style:none;
+}
+QComboBox::down-arrow {
+	image: url(:/images/resources/down_arrow.png);	
+	height:10px;
+	width:10px;
+ }
+
+QComboBox::enabled[isActive = true]
+{
+	border-style: solid;
+	border-width: 3px;
+	border-color: #fad100;
+}
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>RADIO CONTROL</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Receiver Type:</string>
+           </property>
+           <property name="white" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="receiverType">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="configureStart">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+height:20px;
+border-style: solid;
+border-width: 1px;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Mukti Narrow&quot;;
+padding-left:15px;
+padding-right:15px;
+}
+QPushButton::!pressed {
+background-color: rgb(0, 0, 0);
+border-color: rgb(170, 170, 255);
+}
+QPushButton::pressed {
+background-color:#444448;
+border-color: #fad100;
+}
+QPushButton::disabled
+{
+	border-color: rgb(59, 59, 62);
+	background-color: rgb(59, 59, 62);
+	color: #2d2d2f;
+}</string>
+           </property>
+           <property name="text">
+            <string>Configure R/C</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="configureNext">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+height:20px;
+border-style: solid;
+border-width: 1px;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Mukti Narrow&quot;;
+padding-left:15px;
+padding-right:15px;
+}
+QPushButton::!pressed {
+background-color: rgb(0, 0, 0);
+border-color: rgb(170, 170, 255);
+}
+QPushButton::pressed {
+background-color:#444448;
+border-color: #fad100;
+}
+QPushButton::disabled
+{
+	border-color: rgb(59, 59, 62);
+	background-color: rgb(59, 59, 62);
+	color: #2d2d2f;
+}</string>
+           </property>
+           <property name="text">
+            <string>Next</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="6" column="4">
+          <widget class="QCheckBox" name="reverseRoll">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <family>Mukti Narrow</family>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Reverse</string>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="isReversedCheckbox" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="channelNumberThrottle">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>3</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="isChannelNumber" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="channelNumberRoll">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="active" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="isChannelNumber" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="label_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Mukti Narrow</family>
+             <pointsize>11</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Channel assignment:</string>
+           </property>
+           <property name="white" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QLabel" name="labelPitch">
+           <property name="text">
+            <string>Pitch</string>
+           </property>
+           <property name="isChannelLabel" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
+          <widget class="QLabel" name="percentageRoll">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>100%</string>
+           </property>
+           <property name="active" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="isChannelPercentage" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="6" column="2">
+          <widget class="QSlider" name="sliderRoll">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::NoTicks</enum>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLabel" name="labelRoll">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Roll</string>
+           </property>
+           <property name="isChannelLabel" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="5">
+          <widget class="QLabel" name="checkRoll">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resource.qrc">:/images/resources/dialog-apply.svg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="stepText">
+           <property name="font">
+            <font>
+             <family>Mukti Narrow</family>
+             <pointsize>11</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="yellow" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="channelNumberPitch">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>2</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="isChannelNumber" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="channelNumberYaw">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>4</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="isChannelNumber" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="0">
+          <widget class="QLabel" name="channelNumberFlightMode">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="isChannelNumber" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QLabel" name="labelYaw">
+           <property name="text">
+            <string>Yaw</string>
+           </property>
+           <property name="isChannelLabel" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <widget class="QSlider" name="sliderThrottle">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="2">
+          <widget class="QSlider" name="sliderYaw">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="2" colspan="4">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QComboBox" name="flightMode0">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="isActive" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="disabled" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="flightMode1">
+             <property name="isActive" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="disabled" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="flightMode2">
+             <property name="isActive" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="disabled" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="flightMode3">
+             <property name="isActive" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="disabled" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="flightMode4">
+             <property name="isActive" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="disabled" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="7" column="2">
+          <widget class="QSlider" name="sliderPitch">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="3">
+          <widget class="QLabel" name="percentageYaw">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>10%</string>
+           </property>
+           <property name="isChannelPercentage" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="3">
+          <widget class="QLabel" name="percentagePitch">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>10%</string>
+           </property>
+           <property name="isChannelPercentage" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="3">
+          <widget class="QLabel" name="percentageThrottle">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>10%</string>
+           </property>
+           <property name="isChannelPercentage" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QLabel" name="labelThrottle">
+           <property name="text">
+            <string>Throttle</string>
+           </property>
+           <property name="isChannelLabel" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="4">
+          <widget class="QCheckBox" name="reversePitch">
+           <property name="text">
+            <string>Reverse</string>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="isReversedCheckbox" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="4">
+          <widget class="QCheckBox" name="reverseThrottle">
+           <property name="text">
+            <string>Reverse</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="isReversedCheckbox" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="4">
+          <widget class="QCheckBox" name="reverseYaw">
+           <property name="text">
+            <string>Reverse</string>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="isReversedCheckbox" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="5">
+          <widget class="QLabel" name="checkPitch">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resource.qrc">:/images/resources/dialog-apply.svg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="5">
+          <widget class="QLabel" name="checkYaw">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resource.qrc">:/images/resources/dialog-apply.svg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="5">
+          <widget class="QLabel" name="CheckThrottle">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resource.qrc">:/images/resources/dialog-apply.svg</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="1">
+          <widget class="QLabel" name="labelFlightMode">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Flight Mode</string>
+           </property>
+           <property name="isChannelLabel" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="2" colspan="4">
+          <widget class="QSlider" name="sliderFlightMode">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="active" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="disabled" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="flightTab">
+      <attribute name="title">
+       <string>FLIGHT</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="debugTab">
+      <attribute name="title">
+       <string>DEBUG</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="connected">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QCheckBox
+{
+     spacing: 5px;
+	font: 10pt &quot;Mukti Narrow&quot;;
+	color: rgb(255, 255, 255)
+
+ }
+ QCheckBox::indicator:checked {
+     image: url(:/images/resources/ballgreen.png);
+     width: 15px;
+     height: 15px;
+ }
+QCheckBox::indicator:unchecked {
+     image: url(:/images/resources/ballred.png);
+     width: 15px;
+     height: 15px;
+ }</string>
+       </property>
+       <property name="text">
+        <string>Disconnected</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">a{ text-decoration: underline; font- style: italic; color: #00ff00;} 
+a {text-decoration: none;}</string>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:11pt; color:#f5f5f5;&quot;&gt;©&lt;/span&gt;&lt;a href=&quot;http://taulabs.org&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#f5f5f5;text-decoration:none;&quot;&gt;taulabs.org &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="openExternalLinks">
+        <bool>true</bool>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

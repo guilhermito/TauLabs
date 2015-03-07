@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>resources/dialog-apply.svg</file>
+        <file>resources/sliderball2.png</file>
+        <file>resources/sliderball3.png</file>
+        <file>resources/groove.png</file>
+        <file>resources/sliderballgreen.png</file>
+        <file>resources/groovedisabled.png</file>
+        <file>resources/checkboxactivechecked.png</file>
+        <file>resources/checkboxactiveunchecked.png</file>
+        <file>resources/checkboxinactivechecked.png</file>
+        <file>resources/checkboxinactiveunchecked.png</file>
+        <file>resources/checkboxdisabledunchecked.png</file>
+        <file>resources/checkboxdisabledchecked.png</file>
+        <file>resources/down_arrow.png</file>
+        <file>resources/wireless.png</file>
+        <file>resources/ballgreen.png</file>
+        <file>resources/ballred.png</file>
+        <file>resources/wireless_grey.png</file>
+        <file>resources/airplane_grey.png</file>
+        <file>resources/airplane.png</file>
+        <file>resources/debug.png</file>
+        <file>resources/debug_grey.png</file>
+    </qresource>
+    <qresource prefix="/dialog">
+        <file>resources/warning2.jpg</file>
+        <file>resources/triangle-spin.gif</file>
+        <file>resources/question3.gif</file>
+        <file>resources/warning.gif</file>
+        <file>resources/yck6k99cE.png</file>
+        <file>resources/question2.gif</file>
+        <file>resources/question1.gif</file>
+        <file>resources/477.GIF</file>
+        <file>resources/icons.animation.gif</file>
+        <file>resources/5.GIF</file>
+    </qresource>
+</RCC>
