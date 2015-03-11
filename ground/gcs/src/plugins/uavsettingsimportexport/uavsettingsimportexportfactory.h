@@ -35,7 +35,18 @@ class UAVSETTINGSIMPORTEXPORT_EXPORT UAVSettingsImportExportFactory : public QOb
 public:
     UAVSettingsImportExportFactory(QObject *parent = 0);
     ~UAVSettingsImportExportFactory();
+    enum importResult { IMPORT_SUCCESS, IMPORT_PARTIAL_SUCCESS, IMPORT_FAILED };
+    struct objectImporResult
+    {
+        uint objectID;
+        QString objectName;
+        QStringList successfullFields;
+        QStringList failedFields;
+        bool migrated;
+        importResult result;
+    };
 
+    bool importUAVSettingsExternal(QByteArray data);
 private:
     enum storedData { Settings, Data, Both };
     QString createXMLDocument(const enum storedData, const bool fullExport);
@@ -48,6 +59,7 @@ private slots:
 signals:
     void importAboutToBegin();
     void importEnded();
+    void fileParsingFailed();
 
 };
 
