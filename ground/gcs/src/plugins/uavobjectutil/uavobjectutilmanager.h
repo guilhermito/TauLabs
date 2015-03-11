@@ -37,7 +37,7 @@
 #include "uavobject.h"
 #include "objectpersistence.h"
 #include "devicedescriptorstruct.h"
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 #include <QtGlobal>
 #include <QObject>
 #include <QTimer>

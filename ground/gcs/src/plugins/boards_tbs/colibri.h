@@ -28,7 +28,7 @@
 #ifndef COLIBRI_H
 #define COLIBRI_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

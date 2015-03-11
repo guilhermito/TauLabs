@@ -2,9 +2,15 @@ TEMPLATE = lib
 TARGET = Uploader
 DEFINES += UPLOADER_LIBRARY
 QT += svg widgets
+
+SLIM_GCS {
+INCLUDEPATH+=../slimcoreplugin
+}
+!SLIM_GCS {
+INCLUDEPATH+=../coreplugin
+}
 include(uploader_dependencies.pri)
 LIBS *= -l$$qtLibraryName(QUAZIP_lib)
-
 INCLUDEPATH *= ../../libs/quazip
 HEADERS += uploadergadget.h \
     uploadergadgetfactory.h \
@@ -34,4 +40,3 @@ exists(../../../../../build/ground/tlfw_resource/tlfw_resource.qrc ) {
 } else {
     message("tlfw_resource.qrc not found.  Automatically firmware updates disabled.")
 }
-

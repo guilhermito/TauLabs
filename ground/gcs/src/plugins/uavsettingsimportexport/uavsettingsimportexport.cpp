@@ -33,9 +33,9 @@
 #include <QCheckBox>
 #include "importsummary.h"
 // for menu item
-#include <coreplugin/coreconstants.h>
-#include <coreplugin/actionmanager/actionmanager.h>
-#include <coreplugin/icore.h>
+#include <coreconstants.h>
+#include <actionmanager/actionmanager.h>
+#include <icore.h>
 #include <QKeySequence>
 
 // for UAVObjects

@@ -31,12 +31,12 @@
 #include <QPointer>
 #include "ui_uploader.h"
 #include "tl_dfu.h"
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 #include "uploader_global.h"
 #include "devicedescriptorstruct.h"
 #include "uavobjectutilmanager.h"
 #include "uavtalk/telemetrymanager.h"
-#include "coreplugin/connectionmanager.h"
+#include "slimcoreplugin/connectionmanager.h"
 
 using namespace tl_dfu;
 

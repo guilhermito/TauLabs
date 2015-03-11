@@ -30,7 +30,7 @@
 #define TELEMETRYMANAGER_H
 
 #include "uavtalk_global.h"
-#include <coreplugin/generalsettings.h>
+#include "generalsettings.h"
 #include <extensionsystem/pluginmanager.h>
 #include "telemetrymonitor.h"
 #include "telemetry.h"

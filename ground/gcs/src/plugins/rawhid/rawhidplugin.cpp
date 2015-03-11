@@ -28,7 +28,7 @@
 #include "rawhidplugin.h"
 #include "rawhid.h"
 
-#include <coreplugin/icore.h>
+#include <icore.h>
 #include <QtCore/QtPlugin>
 #include <QtCore/QMutexLocker>
 #include <QDebug>

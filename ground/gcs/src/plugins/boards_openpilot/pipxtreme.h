@@ -28,7 +28,7 @@
 #ifndef PIPXTREME_H
 #define PIPXTREME_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

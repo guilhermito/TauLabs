@@ -29,7 +29,7 @@
 #include <QtEndian>
 #include <QDebug>
 #include <extensionsystem/pluginmanager.h>
-#include <coreplugin/generalsettings.h>
+#include <generalsettings.h>
 
 //#define UAVTALK_DEBUG
 #ifdef UAVTALK_DEBUG

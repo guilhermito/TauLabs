@@ -27,7 +27,7 @@
 #ifndef USBDEVICE_H
 #define USBDEVICE_H
 
-#include <coreplugin/idevice.h>
+#include <idevice.h>
 
 class USBDevice : public Core::IDevice
 {

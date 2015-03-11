@@ -28,7 +28,7 @@
 #ifndef QUANTON_H
 #define QUANTON_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

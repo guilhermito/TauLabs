@@ -28,7 +28,7 @@
 #ifndef UPLOADERGADGET_H
 #define UPLOADERGADGET_H
 
-#include <coreplugin/iuavgadget.h>
+#include <iuavgadget.h>
 #include "uploadergadgetwidget.h"
 #include "uploader_global.h"
 

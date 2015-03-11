@@ -28,7 +28,7 @@
 #ifndef FLYINGF3_H
 #define FLYINGF3_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

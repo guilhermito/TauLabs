@@ -28,8 +28,8 @@
 
 #include "telemetrymanager.h"
 #include <extensionsystem/pluginmanager.h>
-#include <coreplugin/icore.h>
-#include <coreplugin/threadmanager.h>
+#include <icore.h>
+#include <threadmanager.h>
 
 TelemetryManager::TelemetryManager() :
     autopilotConnected(false)

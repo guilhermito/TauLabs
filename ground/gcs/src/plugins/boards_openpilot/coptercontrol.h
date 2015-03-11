@@ -28,7 +28,7 @@
 #ifndef COPTERCONTROL_H
 #define COPTERCONTROL_H
 
-#include <coreplugin/iboardtype.h>
+#include "iboardtype.h"
 
 class IBoardType;
 

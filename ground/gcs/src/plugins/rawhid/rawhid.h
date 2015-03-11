@@ -35,7 +35,7 @@
 #include <QIODevice>
 #include <QMutex>
 #include <QByteArray>
-#include <coreplugin/iconnection.h>
+#include <iconnection.h>
 
 #include "hidapi/hidapi.h"
 #include "usbmonitor.h"

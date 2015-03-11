@@ -28,7 +28,7 @@
 #ifndef DISCOVERYF4_H
 #define DISCOVERYF4_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

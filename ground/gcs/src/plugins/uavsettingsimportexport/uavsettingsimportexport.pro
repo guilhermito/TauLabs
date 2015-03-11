@@ -3,9 +3,16 @@ TEMPLATE = lib
 QT += xml
 QT += widgets
 TARGET = UAVSettingsImportExport
-DEFINES += UAVSETTINGSIMPORTEXPORT_LIBRARY
+DEFINES = UAVSETTINGSIMPORTEXPORT_LIBRARY
 include(../../taulabsgcsplugin.pri)
 include(uavsettingsimportexport_dependencies.pri)
+
+SLIM_GCS {
+INCLUDEPATH+=../../../../../build/ground/slimgcs
+}
+!SLIM_GCS {
+INCLUDEPATH+=../../../../../build/ground/gcs
+}
 
 HEADERS += uavsettingsimportexport.h \
     importsummary.h \

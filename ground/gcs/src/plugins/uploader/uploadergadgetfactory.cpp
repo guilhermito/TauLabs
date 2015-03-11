@@ -27,7 +27,7 @@
 
 #include "uploadergadgetfactory.h"
 #include "uploadergadget.h"
-#include <coreplugin/iuavgadget.h>
+#include <iuavgadget.h>
 #include "uploadergadgetwidget.h"
 
 using namespace uploader;

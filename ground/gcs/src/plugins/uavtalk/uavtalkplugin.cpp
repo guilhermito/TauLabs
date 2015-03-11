@@ -26,8 +26,8 @@
  */
 #include "uavtalkplugin.h"
 
-#include <coreplugin/icore.h>
-#include <coreplugin/connectionmanager.h>
+#include <icore.h>
+#include <connectionmanager.h>
 
 UAVTalkPlugin::UAVTalkPlugin()
 {

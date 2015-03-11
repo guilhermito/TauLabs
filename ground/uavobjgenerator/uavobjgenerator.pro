@@ -11,6 +11,13 @@ macx {
 
 cache()
 
+SLIM_GCS {
+INCLUDEPATH += $$PWD/../gcs/src/plugins/slimcoreplugin
+}
+!SLIM_GCS {
+INCLUDEPATH += $$PWD/../gcs/src/plugins/coreplugin
+}
+
 TARGET = uavobjgenerator
 CONFIG += console
 CONFIG -= app_bundle

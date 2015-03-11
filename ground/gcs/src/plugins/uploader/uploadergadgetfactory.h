@@ -28,7 +28,7 @@
 #ifndef UPLOADERGADGETFACTORY_H
 #define UPLOADERGADGETFACTORY_H
 
-#include <coreplugin/iuavgadgetfactory.h>
+#include <iuavgadgetfactory.h>
 #include "uploader_global.h"
 
 namespace Core {

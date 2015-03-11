@@ -2,12 +2,16 @@ TEMPLATE = lib
 TARGET = TauLabs
 include(../../taulabsgcsplugin.pri)
 include(../../plugins/uavobjects/uavobjects.pri)
-include(../../plugins/coreplugin/coreplugin.pri)
 include(../../plugins/uavobjectutil/uavobjectutil.pri)
 include(../../plugins/uavobjectwidgetutils/uavobjectwidgetutils.pri)
 
 OTHER_FILES += TauLabs.json
-
+SLIM_GCS {
+INCLUDEPATH+=../slimcoreplugin
+}
+!SLIM_GCS {
+INCLUDEPATH+=../coreplugin
+}
 HEADERS += \
     taulabsplugin.h \
     sparky.h \

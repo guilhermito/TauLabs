@@ -4,6 +4,15 @@ TEMPLATE = lib
 TARGET = UAVTalk
 include(../../taulabsgcsplugin.pri)
 include(uavtalk_dependencies.pri)
+
+SLIM_GCS {
+INCLUDEPATH+=../slimcoreplugin
+INCLUDEPATH+=../../../../../build/ground/slimgcs
+}
+!SLIM_GCS {
+INCLUDEPATH+=../coreplugin
+INCLUDEPATH+=../../../../../build/ground/gcs
+}
 HEADERS += uavtalk.h \
     uavtalkplugin.h \
     telemetrymonitor.h \

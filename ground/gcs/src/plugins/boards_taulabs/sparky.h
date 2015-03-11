@@ -27,7 +27,7 @@
 #ifndef SPARKY_H
 #define SPARKY_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

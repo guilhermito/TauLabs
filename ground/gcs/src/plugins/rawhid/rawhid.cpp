@@ -29,7 +29,7 @@
 #include "rawhid.h"
 
 #include "rawhid_const.h"
-#include "coreplugin/connectionmanager.h"
+#include "connectionmanager.h"
 #include <extensionsystem/pluginmanager.h>
 #include <QtGlobal>
 #include <QList>

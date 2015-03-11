@@ -1,4 +1,9 @@
+SLIM_GCS {
+include(../../plugins/slimcoreplugin/coreplugin.pri)
+}
+!SLIM_GCS {
 include(../../plugins/coreplugin/coreplugin.pri)
+}
 include(../../libs/utils/utils.pri)
 
 # Provide the path to the auto-generated uavobject source files for the GCS.

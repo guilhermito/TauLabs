@@ -27,8 +27,8 @@
  */
 
 #include "telemetrymonitor.h"
-#include "coreplugin/connectionmanager.h"
-#include "coreplugin/icore.h"
+#include "connectionmanager.h"
+#include "icore.h"
 #include "firmwareiapobj.h"
 
 //Number of retries for initial session object fetching

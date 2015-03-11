@@ -32,7 +32,7 @@
 #include "uploadergadgetwidget.h"
 #include "firmwareiapobj.h"
 #include "fileutils.h"
-#include "coreplugin/icore.h"
+#include "icore.h"
 #include "rawhid/rawhidplugin.h"
 
 using namespace uploader;

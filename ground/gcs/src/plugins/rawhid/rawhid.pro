@@ -3,6 +3,12 @@ TARGET = RawHID
 QT +=widgets
 include(../../taulabsgcsplugin.pri)
 include(rawhid_dependencies.pri)
+SLIM_GCS {
+INCLUDEPATH+=../slimcoreplugin
+}
+!SLIM_GCS {
+INCLUDEPATH+=../coreplugin
+}
 HEADERS += rawhid_global.h \
     rawhidplugin.h \
     rawhid.h \

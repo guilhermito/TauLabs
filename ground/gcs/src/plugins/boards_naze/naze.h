@@ -28,7 +28,7 @@
 #ifndef NAZE_H
 #define NAZE_H
 
-#include <coreplugin/iboardtype.h>
+#include <iboardtype.h>
 
 class IBoardType;
 

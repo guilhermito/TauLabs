@@ -32,9 +32,9 @@
 #include "rawhid.h"
 #include "usbmonitor.h"
 #include "extensionsystem/pluginmanager.h"
-#include "coreplugin/iconnection.h"
-#include "coreplugin/iboardtype.h"
-#include "coreplugin/boardmanager.h"
+#include "iconnection.h"
+#include "iboardtype.h"
+#include "boardmanager.h"
 #include <extensionsystem/iplugin.h>
 
 #include <QtCore/QMutex>

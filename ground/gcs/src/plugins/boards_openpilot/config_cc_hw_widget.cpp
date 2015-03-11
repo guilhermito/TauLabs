@@ -36,7 +36,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <extensionsystem/pluginmanager.h>
-#include <coreplugin/generalsettings.h>
+#include <generalsettings.h>
 
 
 ConfigCCHWWidget::ConfigCCHWWidget(QWidget *parent) : ConfigTaskWidget(parent)

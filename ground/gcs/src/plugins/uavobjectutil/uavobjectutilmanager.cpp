@@ -41,8 +41,8 @@
 #include "homelocation.h"
 #include "gpsposition.h"
 
-#include "../../../../../build/ground/gcs/gcsversioninfo.h"
-#include <coreplugin/coreconstants.h>
+#include "gcsversioninfo.h"
+#include <coreconstants.h>
 
 #ifdef UAVOBJECTUTIL_DEBUG
   #define UAVOBJECTUTIL_QXTLOG_DEBUG(...) qDebug()<<__VA_ARGS__

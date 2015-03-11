@@ -34,9 +34,9 @@
 #include "importsummary.h"
 
 // for menu item
-#include <coreplugin/coreconstants.h>
-#include <coreplugin/actionmanager/actionmanager.h>
-#include <coreplugin/icore.h>
+#include <coreconstants.h>
+#include <actionmanager/actionmanager.h>
+#include <icore.h>
 #include <QKeySequence>
 
 // for UAVObjects
@@ -61,6 +61,8 @@ UAVSettingsImportExportFactory::UAVSettingsImportExportFactory(QObject *parent):
 
     // Add Menu entry
     Core::ActionManager *am = Core::ICore::instance()->actionManager();
+   if(!am)
+       return;
     Core::ActionContainer *ac = am->actionContainer(Core::Constants::M_FILE);
     Core::Command *cmd = am->registerAction(new QAction(this),
                                             "UAVSettingsImportExportPlugin.UAVSettingsExport",
@@ -218,6 +220,107 @@ void UAVSettingsImportExportFactory::importUAVSettings()
     swui.exec();
 }
 
+// Slot called by the menu manager on user action
+bool UAVSettingsImportExportFactory::importUAVSettingsExternal(QByteArray data)
+{
+    ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
+    UAVObjectManager *objManager = pm->getObject<UAVObjectManager>();
+    QDomDocument doc("UAVObjects");
+    QList <objectImporResult> importResultList;
+    if (!doc.setContent(data)) {
+        emit fileParsingFailed();
+        return false;
+    }
+
+    QDomElement root = doc.documentElement();
+    if (root.tagName() == "uavobjects") {
+        root = root.firstChildElement("settings");
+    }
+    if (root.isNull() || (root.tagName() != "settings")) {
+        emit fileParsingFailed();
+        return false;
+    }
+
+    QDomNode node = root.firstChild();
+    while (!node.isNull()) {
+        QDomElement e = node.toElement();
+        if (e.tagName() == "object") {
+            objectImporResult result;
+            //  - Read each object
+            QString uavObjectName  = e.attribute("name");
+            uint uavObjectID = e.attribute("id").toUInt(NULL,16);
+            result.objectName = uavObjectName;
+            result.objectID = uavObjectID;
+            // Sanity Check:
+            UAVObject *obj = objManager->getObject(uavObjectName);
+            UAVDataObject *dobj = dynamic_cast<UAVDataObject*>(obj);
+            if (obj == NULL) {
+                   result.result = IMPORT_FAILED;
+            } else if(dobj && !dobj->getIsPresentOnHardware()) {
+                    result.result = IMPORT_FAILED;
+            } else {
+                //  - Update each field
+                //  - Issue and "updated" command
+                QDomNode field = node.firstChild();
+                bool allSuccess;
+                bool errorFieldNameNotFound;
+                bool errorFieldType;
+                while(!field.isNull()) {
+                    errorFieldNameNotFound = false;
+                    errorFieldType = false;
+                    QDomElement f = field.toElement();
+                    if (f.tagName() == "field") {
+                        UAVObjectField *uavfield = obj->getField(f.attribute("name"));
+                        if (uavfield) {
+                            QStringList list = f.attribute("values").split(",");
+                            if (list.length() == 1) {
+                                if (false == uavfield->checkValue(f.attribute("values"))) {
+                                    errorFieldType = true;
+                                } else {
+                                    uavfield->setValue(f.attribute("values"));
+                                }
+                            } else {
+                                // This is an enum:
+                                int i = 0;
+                                QStringList list = f.attribute("values").split(",");
+                                foreach (QString element, list) {
+                                    if (false == uavfield->checkValue(element, i)) {
+                                        errorFieldType = true;
+                                    } else {
+                                     uavfield->setValue(element,i);
+                                    }
+                                    i++;
+                                }
+                            }
+                        } else {
+                            errorFieldNameNotFound = true;
+                        }
+                    }
+                    if(errorFieldNameNotFound || errorFieldType)
+                        result.failedFields.append(f.attribute("name"));
+                    else
+                        result.successfullFields.append(f.attribute("name"));
+                    field = field.nextSibling();
+                }
+                allSuccess = !errorFieldNameNotFound && !errorFieldType;
+                if(allSuccess)
+                    result.result = IMPORT_SUCCESS;
+                else
+                    result.result = IMPORT_PARTIAL_SUCCESS;
+                obj->updated();
+
+                if (uavObjectID != obj->getObjID()) {
+                    result.migrated = true;
+                    qDebug() << "Mismatch for Object " << uavObjectName << uavObjectID << " - " << obj->getObjID();
+                }
+            }
+            importResultList.append(result);
+        }
+        node = node.nextSibling();
+    }
+    qDebug() << "End import";
+    return true;
+}
 
 // Create an XML document from UAVObject database
 QString UAVSettingsImportExportFactory::createXMLDocument(const enum storedData what, const bool fullExport)
@@ -327,7 +430,6 @@ QString UAVSettingsImportExportFactory::createXMLDocument(const enum storedData 
                     }
                     o.appendChild(f);
                 }
-
                 // append to the settings or data element
                 if (obj->isSettings())
                     settings.appendChild(o);
@@ -336,7 +438,6 @@ QString UAVSettingsImportExportFactory::createXMLDocument(const enum storedData 
             }
         }
     }
-
     return doc.toString(4);
 }
 

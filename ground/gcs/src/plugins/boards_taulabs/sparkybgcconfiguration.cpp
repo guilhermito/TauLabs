@@ -30,7 +30,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <extensionsystem/pluginmanager.h>
-#include <coreplugin/generalsettings.h>
+#include <generalsettings.h>
 
 #include "sparkybgcconfiguration.h"
 #include "ui_sparkybgcconfiguration.h"
