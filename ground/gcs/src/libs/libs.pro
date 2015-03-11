@@ -1,6 +1,5 @@
 TEMPLATE  = subdirs
 CONFIG   += ordered
-CONFIG   += SLIM_GCS
 
 QT += widgets
 

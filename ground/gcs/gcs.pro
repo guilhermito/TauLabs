@@ -4,6 +4,13 @@ contains(QT_VERSION, ^[0-4]\\..*) {
     error("Cannot build GCS with Qt version $${QT_VERSION}. Use at least Qt 5.0.1!")
 }
 
+SLIM_GCS {
+message(gcs.pro: Building slim gcs)
+}
+!SLIM_GCS {
+message(gcs.pro: Building full gcs)
+}
+
 cache()
 
 include(gcs.pri)

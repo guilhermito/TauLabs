@@ -55,6 +55,8 @@ isEmpty(GCS_BUILD_TREE) {
     GCS_BUILD_TREE = $$cleanPath($$OUT_PWD)
     GCS_BUILD_TREE ~= s,$$re_escape($$sub_dir)$,,
 }
+!CONFIG(SLIM_GCS)
+{
 GCS_APP_PATH = $$GCS_BUILD_TREE/bin
 macx {
     GCS_APP_TARGET   = "Tau Labs GCS"
@@ -83,7 +85,40 @@ macx {
     GCS_DOC_PATH     = $$GCS_BUILD_TREE/share/doc
     !isEqual(GCS_SOURCE_TREE, $$GCS_BUILD_TREE):copydata = 1
 }
+}
 
+CONFIG(SLIM_GCS) {
+GCS_BUILD_TREE = $$GCS_BUILD_TREE/../slimgcs
+GCS_APP_PATH = $$GCS_BUILD_TREE/bin
+macx {
+    QMAKE_CFLAGS_X86_64 += -mmacosx-version-min=10.7
+    QMAKE_CXXFLAGS_X86_64 = $$QMAKE_CFLAGS_X86_64
+    GCS_APP_TARGET   = "TBS Agent"
+    GCS_LIBRARY_PATH = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Plugins
+    GCS_PLUGIN_PATH  = $$GCS_LIBRARY_PATH
+    GCS_LIBEXEC_PATH = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Resources
+    GCS_DATA_PATH    = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Resources
+    GCS_DATA_BASENAME = Resources
+    GCS_DOC_PATH     = $$GCS_DATA_PATH/doc
+    GCS_BIN_PATH     = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/MacOS
+    copydata = 1
+} else {
+    win32 {
+        contains(TEMPLATE, vc.*)|contains(TEMPLATE_PREFIX, vc):vcproj = 1
+        GCS_APP_TARGET   = tbsagent
+    } else {
+        GCS_APP_WRAPPER  = tbsagent
+        GCS_APP_TARGET   = tbsagent.bin
+    }
+    GCS_LIBRARY_PATH = $$GCS_BUILD_TREE/$$GCS_LIBRARY_BASENAME/taulabs
+    GCS_PLUGIN_PATH  = $$GCS_LIBRARY_PATH/plugins
+    GCS_LIBEXEC_PATH = $$GCS_APP_PATH # FIXME
+    GCS_DATA_PATH    = $$GCS_BUILD_TREE/share/taulabs
+    GCS_DATA_BASENAME = share/taulabs
+    GCS_DOC_PATH     = $$GCS_BUILD_TREE/share/doc
+    !isEqual(GCS_SOURCE_TREE, $$GCS_BUILD_TREE):copydata = 1
+}
+}
 
 DEFINES += GCS_DATA_BASENAME=\\\"$$GCS_DATA_BASENAME\\\"
 
@@ -131,6 +166,14 @@ linux-g++* {
 win32 {
 	# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=52991
 	QMAKE_CXXFLAGS += -mno-ms-bitfields
+}
+SLIM_GCS {
+INCLUDEPATH *= \
+    $$GCS_SOURCE_TREE/src/plugins/slimcoreplugin
+}
+!SLIM_GCS {
+INCLUDEPATH *= \
+    $$GCS_SOURCE_TREE/src/plugins/coreplugin
 }
 
 unix {
