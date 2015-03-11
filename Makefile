@@ -76,7 +76,7 @@ endif
 ALL_BOARDS :=
 include $(ROOT_DIR)/flight/targets/*/target-defs.mk
 
-# OpenPilot GCS build configuration (debug | release)
+# Taulabs GCS build configuration (debug | release)
 GCS_BUILD_CONF ?= debug
 
 # And the flight build configuration (debug | default | release)
@@ -298,11 +298,42 @@ else
 UAVOGEN_SILENT := silent
 endif
 endif
+
+.PHONY: slimgcs
+slimgcs:  uavobjects_gcs
+	$(V1) mkdir -p $(BUILD_DIR)/ground/$@
+	$(V1) ( cd $(BUILD_DIR)/ground/$@ && \
+	  PYTHON=$(PYTHON) $(QMAKE) $(ROOT_DIR)/ground/gcs/gcs.pro -spec $(QT_SPEC) -r CONFIG+=SLIM_GCS CONFIG+="$(GCS_BUILD_CONF) $(GCS_SILENT)" $(GCS_QMAKE_OPTS) && \
+	  $(MAKE) -w ; \
+	)
+
+# Workaround for qmake bug that prevents copying the application icon
+ifneq (,$(filter $(UNAME), Darwin))
+	$(V1) ( cd $(BUILD_DIR)/ground/slimgcs/src/app && \
+	  $(MAKE) ../../bin/Tau\ Labs\ GCS.app/Contents/Resources/taulabs.icns && \
+	  $(MAKE) ../../bin/Tau\ Labs\ GCS.app/Contents/Info.plist ; \
+	)
+endif
+
+.PHONY: slimgcs_clean
+slimgcs_clean:
+	$(V0) @echo " CLEAN      $@"
+	$(V1) [ ! -d "$(BUILD_DIR)/ground/slimgcs" ] || $(RM) -r "$(BUILD_DIR)/ground/slimgcs"
+
+ifndef WINDOWS
+# unfortunately the silent linking command is broken on windows
+ifeq ($(V), 1)
+UAVOGEN_SILENT := 
+else
+UAVOGEN_SILENT := silent
+endif
+endif
+
 .PHONY: uavobjgenerator
 uavobjgenerator:
 	$(V1) mkdir -p $(BUILD_DIR)/ground/$@
 	$(V1) ( cd $(BUILD_DIR)/ground/$@ && \
-	  PYTHON=$(PYTHON) $(QMAKE) $(ROOT_DIR)/ground/uavobjgenerator/uavobjgenerator.pro -spec $(QT_SPEC) -r CONFIG+="debug $(UAVOGEN_SILENT)" && \
+	  PYTHON=$(PYTHON) $(QMAKE) $(ROOT_DIR)/ground/uavobjgenerator/uavobjgenerator.pro -spec $(QT_SPEC) -r CONFIG+="debug $(UAVOGEN_SILENT)" $(GCS_QMAKE_OPTS) && \
 	  $(MAKE) --no-print-directory -w ; \
 	)
 
