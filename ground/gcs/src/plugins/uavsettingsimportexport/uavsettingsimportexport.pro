@@ -6,6 +6,7 @@ TARGET = UAVSettingsImportExport
 DEFINES = UAVSETTINGSIMPORTEXPORT_LIBRARY
 include(../../taulabsgcsplugin.pri)
 include(uavsettingsimportexport_dependencies.pri)
+include(../../libs/utils/utils.pri)
 
 SLIM_GCS {
 INCLUDEPATH+=../../../../../build/ground/slimgcs

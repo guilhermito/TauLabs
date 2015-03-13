@@ -45,12 +45,18 @@ public:
         bool migrated;
         importResult result;
     };
+    struct compatibleUpdate
+    {
+        QDate date;
+        QString fileName;
+    };
 
-    bool importUAVSettingsExternal(QByteArray data);
+    bool importUAVSettingsFromFile(QString filename);
+    QString backupUAVSettings();
+    compatibleUpdate findLastCompatibleUpdate();
 private:
     enum storedData { Settings, Data, Both };
     QString createXMLDocument(const enum storedData, const bool fullExport);
-
 private slots:
     void importUAVSettings();
     void exportUAVSettings();

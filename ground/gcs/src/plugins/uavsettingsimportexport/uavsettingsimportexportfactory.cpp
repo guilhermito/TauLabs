@@ -50,6 +50,8 @@
 // for file dialog and error messages
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDateTime>
+#include "utils/pathutils.h"
 
 UAVSettingsImportExportFactory::~UAVSettingsImportExportFactory()
 {
@@ -220,14 +222,19 @@ void UAVSettingsImportExportFactory::importUAVSettings()
     swui.exec();
 }
 
-// Slot called by the menu manager on user action
-bool UAVSettingsImportExportFactory::importUAVSettingsExternal(QByteArray data)
+bool UAVSettingsImportExportFactory::importUAVSettingsFromFile(QString fileName)
 {
+    QFile file(fileName);
     ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
     UAVObjectManager *objManager = pm->getObject<UAVObjectManager>();
     QDomDocument doc("UAVObjects");
     QList <objectImporResult> importResultList;
-    if (!doc.setContent(data)) {
+    if(!file.open(QFile::ReadOnly|QFile::Text))
+    {
+        emit fileParsingFailed();
+        return false;
+    }
+    if (!doc.setContent(file.readAll())) {
         emit fileParsingFailed();
         return false;
     }
@@ -439,6 +446,120 @@ QString UAVSettingsImportExportFactory::createXMLDocument(const enum storedData 
         }
     }
     return doc.toString(4);
+}
+
+// Create an XML document from UAVObject database
+QString UAVSettingsImportExportFactory::backupUAVSettings()
+{
+    // generate an XML first (used for all export formats as a formatted data source)
+    ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
+    UAVObjectManager *objManager = pm->getObject<UAVObjectManager>();
+
+    // create an XML root
+    QDomDocument doc("UAVObjects");
+    QDomElement root = doc.createElement("uavobjects");
+    doc.appendChild(root);
+
+    // add hardware, firmware and GCS version info
+    QDomElement versionInfo = doc.createElement("version");
+    root.appendChild(versionInfo);
+
+    UAVObjectUtilManager *utilMngr = pm->getObject<UAVObjectUtilManager>();
+    deviceDescriptorStruct board;
+    utilMngr->getBoardDescriptionStruct(board);
+
+    QDomElement hw = doc.createElement("hardware");
+    hw.setAttribute("type", QString().setNum(board.boardType, 16));
+    hw.setAttribute("revision", QString().setNum(board.boardRevision, 16));
+    hw.setAttribute("serial", QString(utilMngr->getBoardCPUSerial().toHex()));
+    versionInfo.appendChild(hw);
+
+    QString dirname = QString("%0%1_%2").arg(Utils::PathUtils().GetStoragePath() + "settingsBackup" + QDir::separator()).arg(QString().setNum(board.boardType, 16)).arg(QString().setNum(board.boardRevision, 16));
+    QString fileName = QString("%0%1%2.xml").arg(dirname).arg(QDir::separator()).arg(QString(utilMngr->getBoardCPUSerial().toHex()));
+    QDir dir(dirname);
+    if(!dir.exists())
+        dir.mkdir(dirname);
+    QFile file(fileName);
+    if(!file.open(QIODevice::WriteOnly))
+        return QString::null;
+    QDomElement fw = doc.createElement("firmware");
+    fw.setAttribute("date", board.gitDate);
+    fw.setAttribute("hash", board.gitHash);
+    fw.setAttribute("tag", board.gitTag);
+    versionInfo.appendChild(fw);
+
+    QString gcsRevision = QString::fromLatin1(Core::Constants::GCS_REVISION_STR);
+    QString gcsGitDate = gcsRevision.mid(gcsRevision.indexOf(" ") + 1, 14);
+    QString gcsGitHash = gcsRevision.mid(gcsRevision.indexOf(":") + 1, 8);
+    QString gcsGitTag = gcsRevision.left(gcsRevision.indexOf(":"));
+
+    QDomElement gcs = doc.createElement("gcs");
+    gcs.setAttribute("date", gcsGitDate);
+    gcs.setAttribute("hash", gcsGitHash);
+    gcs.setAttribute("tag", gcsGitTag);
+    versionInfo.appendChild(gcs);
+
+    // create settings and/or data elements
+    QDomElement settings = doc.createElement("settings");
+
+    root.appendChild(settings);
+
+    // iterate over settings objects
+    QVector< QVector<UAVDataObject*> > objList = objManager->getDataObjectsVector();
+    foreach (QVector<UAVDataObject*> list, objList) {
+        foreach (UAVDataObject *obj, list) {
+            if(!obj->getIsPresentOnHardware())
+                continue;
+            if (obj->isSettings()) {
+                // add each object to the XML
+                QDomElement o = doc.createElement("object");
+                o.setAttribute("name", obj->getName());
+                o.setAttribute("id", QString("0x")+ QString().setNum(obj->getObjID(),16).toUpper());
+                // iterate over fields
+                QList<UAVObjectField*> fieldList = obj->getFields();
+                foreach (UAVObjectField* field, fieldList) {
+                    QDomElement f = doc.createElement("field");
+                    // iterate over values
+                    QString vals;
+                    quint32 nelem = field->getNumElements();
+                    for (unsigned int n = 0; n < nelem; ++n) {
+                        vals.append(QString("%1,").arg(field->getValue(n).toString()));
+                    }
+                    vals.chop(1);
+
+                    f.setAttribute("name", field->getName());
+                    f.setAttribute("values", vals);
+                    o.appendChild(f);
+                }
+                // append to the settings or data element
+                if (obj->isSettings())
+                    settings.appendChild(o);
+            }
+        }
+    }
+    file.write(doc.toString(4).toLatin1());
+    file.close();
+    return fileName;
+}
+
+UAVSettingsImportExportFactory::compatibleUpdate UAVSettingsImportExportFactory::findLastCompatibleUpdate()
+{
+    UAVSettingsImportExportFactory::compatibleUpdate lastBackup;
+    lastBackup.date = QDate(1900,1,1);
+    ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
+    UAVObjectUtilManager *utilMngr = pm->getObject<UAVObjectUtilManager>();
+    deviceDescriptorStruct board;
+    utilMngr->getBoardDescriptionStruct(board);
+    QString dirname = QString("%0%1_%2").arg(Utils::PathUtils().GetStoragePath() + "settingsBackup" + QDir::separator()).arg(QString().setNum(board.boardType, 16)).arg(QString().setNum(board.boardRevision, 16));
+    QDir dir(dirname);
+    QStringList filter;
+    filter.append(QString("%0.xml").arg(QString(utilMngr->getBoardCPUSerial().toHex())));
+    QFileInfoList files = dir.entryInfoList(filter);
+    if(files.length() == 0)
+        return lastBackup;
+    lastBackup.date = files.at(0).created().date();
+    lastBackup.fileName = files.at(0).absoluteFilePath();
+    return lastBackup;
 }
 
 // Slot called by the menu manager on user action
