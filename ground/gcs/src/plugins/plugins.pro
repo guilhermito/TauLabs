@@ -398,6 +398,8 @@ SUBDIRS += plugin_slimconfig
 # Updater Plugin
 plugin_updater.subdir = updater
 plugin_updater.depends = plugin_coreplugin
+plugin_updater.depends += plugin_uavtalk
+plugin_updater.depends += plugin_uavobjectutil
 SUBDIRS += plugin_updater
 
 SLIM_GCS {
