@@ -10,8 +10,7 @@ INCLUDEPATH+=../slimcoreplugin
 INCLUDEPATH+=../coreplugin
 }
 include(uploader_dependencies.pri)
-LIBS *= -l$$qtLibraryName(QUAZIP_lib)
-INCLUDEPATH *= ../../libs/quazip
+include(../../libs/quazip/quazip.pri)
 HEADERS += uploadergadget.h \
     uploadergadgetfactory.h \
     uploadergadgetwidget.h \

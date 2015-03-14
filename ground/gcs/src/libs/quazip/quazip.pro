@@ -1,7 +1,7 @@
 TEMPLATE = lib
-TARGET = QUAZIP_lib
+TARGET = Quazip
 
-INCLUDEPATH += ../glc_lib/3rdparty/zlib
+INCLUDEPATH += ./zlib
 
 DEFINES += QUAZIP_LIB_LIBRARY
 include(../../taulabslibrary.pri)
@@ -21,14 +21,14 @@ SOURCES += ioapi.c \
            unzip.c \
            zip.c
 
-SOURCES += ../glc_lib/3rdparty/zlib/adler32.c \
-           ../glc_lib/3rdparty/zlib/compress.c \
-           ../glc_lib/3rdparty/zlib/crc32.c \
-           ../glc_lib/3rdparty/zlib/deflate.c \
-           ../glc_lib/3rdparty/zlib/gzio.c \
-           ../glc_lib/3rdparty/zlib/inffast.c \
-           ../glc_lib/3rdparty/zlib/inflate.c \
-           ../glc_lib/3rdparty/zlib/inftrees.c \
-           ../glc_lib/3rdparty/zlib/trees.c \
-           ../glc_lib/3rdparty/zlib/uncompr.c \
-           ../glc_lib/3rdparty/zlib/zutil.c
+SOURCES += ./zlib/adler32.c \
+           ./zlib/compress.c \
+           ./zlib/crc32.c \
+           ./zlib/deflate.c \
+           ./zlib/gzio.c \
+           ./zlib/inffast.c \
+           ./zlib/inflate.c \
+           ./zlib/inftrees.c \
+           ./zlib/trees.c \
+           ./zlib/uncompr.c \
+           ./zlib/zutil.c
