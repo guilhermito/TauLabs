@@ -310,8 +310,8 @@ slimgcs:  uavobjects_gcs
 # Workaround for qmake bug that prevents copying the application icon
 ifneq (,$(filter $(UNAME), Darwin))
 	$(V1) ( cd $(BUILD_DIR)/ground/slimgcs/src/app && \
-	  $(MAKE) ../../bin/Tau\ Labs\ GCS.app/Contents/Resources/taulabs.icns && \
-	  $(MAKE) ../../bin/Tau\ Labs\ GCS.app/Contents/Info.plist ; \
+	  $(MAKE) ../../bin/TBS\ Agent.app/Contents/Resources/taulabs.icns && \
+	  $(MAKE) ../../bin/TBS\ Agent.app/Contents/Info.plist ; \
 	)
 endif
 
@@ -1049,6 +1049,10 @@ package:
 
 .PHONY: standalone
 standalone:
+	$(V1) cd package && $(MAKE) --no-print-directory $@
+
+.PHONY: slimgcs_standalone
+slimgcs_standalone:
 	$(V1) cd package && $(MAKE) --no-print-directory $@
 
 .PHONY: package_resources

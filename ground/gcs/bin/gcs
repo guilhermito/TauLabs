@@ -33,4 +33,4 @@ bindir=`dirname "$me"`
 libdir=`cd "${bindir}/../lib" ; pwd`
 LD_LIBRARY_PATH="${libdir}/taulabs:${LD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH
-exec "${bindir}/$0.bin" ${1+"$@"}
+exec "${bindir}/${0##*/}.bin" ${1+"$@"}
