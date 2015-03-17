@@ -17,7 +17,7 @@ standalone: gcs
 
 # calls macdeployqt and bundles the extra libraries into .app
 slimgcs_standalone: slimgcs
-	"${ROOT_DIR}/package/osx/libraries" ${SLIMGCS_APP_PATH}/${SLIMGCS_APP_NAME}
+	"${ROOT_DIR}/package/osx/slimgcslibraries" ${SLIMGCS_APP_PATH}/${SLIMGCS_APP_NAME}
 	
 # puts the files into a dmg
 dmg: standalone package_flight package_matlab

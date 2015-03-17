@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+APP="${1?}"
+PLUGINS="${APP}/Contents/Plugins"
+QT_DIR=$(otool -L "${APP}/Contents/MacOS/TBS Agent"  | sed -n -e 's/\/QtCore\.framework.*//p' | sed -n -E 's:^.::p')
+
+# macdeployqt will copy all the Qt5 binaries to the app bundle and relink as appropriate
+echo "Running \"${QT_DIR}/../bin/macdeployqt\" \"${APP}\" -verbose=2 -no-strip -always-overwrite"
+"${QT_DIR}/../bin/macdeployqt" "${APP}" -verbose=2 -no-strip -always-overwrite
+
