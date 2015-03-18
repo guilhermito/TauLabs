@@ -3,6 +3,7 @@ include(gcs.pri)
 TEMPLATE = subdirs
 # Copy Qt runtime libraries into the build directory (to run or package)
 equals(copydata, 1) {
+!slimgcs {
     # Windows release only, no debug target DLLs ending with 'd'
     win32:CONFIG(release, debug|release) {
 
@@ -67,4 +68,5 @@ equals(copydata, 1) {
         data_copy.target = FORCE
         QMAKE_EXTRA_TARGETS += data_copy
     }
+}
 }

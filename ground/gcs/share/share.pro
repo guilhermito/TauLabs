@@ -6,6 +6,7 @@ SUBDIRS = taulabs/translations
 DATACOLLECTIONS = dials models pfd sounds diagrams mapicons stylesheets default_configurations welcome
 
 equals(copydata, 1) {
+!slimgcs {
    for(dir, DATACOLLECTIONS) {
        exists($$GCS_SOURCE_TREE/share/taulabs/$$dir) {
            macx:data_copy.commands += $(COPY_DIR) $$targetPath(\"$$GCS_SOURCE_TREE/share/taulabs/$$dir\") $$targetPath(\"$$GCS_DATA_PATH/\") $$addNewline()
@@ -17,4 +18,5 @@ equals(copydata, 1) {
 
     data_copy.target = FORCE
     QMAKE_EXTRA_TARGETS += data_copy
+}
 }
