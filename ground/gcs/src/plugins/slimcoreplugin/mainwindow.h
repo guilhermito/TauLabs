@@ -99,12 +99,12 @@ public:
     void extensionsInitialized();
     void shutdown();
 
-    void addContextObject(IContext *contex){}
-    void removeContextObject(IContext *contex){}
-    void readSettings(QSettings* qs = 0, bool workspaceDiffOnly = false){}
-    void saveSettings(QSettings* qs = 0){}
-    void readSettings(IConfigurablePlugin* plugin, QSettings* qs = 0){}
-    void saveSettings(IConfigurablePlugin* plugin, QSettings* qs = 0){}
+    void addContextObject(IContext *contex){Q_UNUSED(contex);}
+    void removeContextObject(IContext *contex){Q_UNUSED(contex);}
+    void readSettings(QSettings* qs = 0, bool workspaceDiffOnly = false){Q_UNUSED(qs);Q_UNUSED(workspaceDiffOnly);}
+    void saveSettings(QSettings* qs = 0){Q_UNUSED(qs);}
+    void readSettings(IConfigurablePlugin* plugin, QSettings* qs = 0){Q_UNUSED(qs);Q_UNUSED(plugin);}
+    void saveSettings(IConfigurablePlugin* plugin, QSettings* qs = 0){Q_UNUSED(qs);Q_UNUSED(plugin);}
     void deleteSettings(){}
 
     TBSSplashDialog * tbsDialog(){return m_tbsDialog;}
@@ -120,12 +120,12 @@ public:
     Core::ThreadManager *threadManager() const;
     Core::ModeManager *modeManager() const {return NULL;}
     Core::MimeDatabase *mimeDatabase() const {return NULL;}
-    QSettings *settings(QSettings::Scope scope) const {return NULL;}
+    QSettings *settings(QSettings::Scope scope) const {Q_UNUSED(scope);return NULL;}
     inline SettingsDatabase *settingsDatabase() const { return NULL; }
     IContext * currentContextObject() const {return NULL;}
-    void addAdditionalContext(int context) {}
-    void removeAdditionalContext(int context) {}
-    bool hasContext(int context) const {return true;}
+    void addAdditionalContext(int context) {Q_UNUSED(context);}
+    void removeAdditionalContext(int context) {Q_UNUSED(context);}
+    bool hasContext(int context) const {Q_UNUSED(context);return true;}
     void updateContext(){}
     MainWidget * mainWidget(){return childWidget;}
 signals:

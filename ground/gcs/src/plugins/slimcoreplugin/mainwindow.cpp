@@ -331,6 +331,12 @@ bool MainWindow::showWarningWithOptions(const QString &title,
                                         const QString &settingsId,
                                         QWidget *parent)
 {
+    Q_UNUSED(title);
+    Q_UNUSED(text);
+    Q_UNUSED(details);
+    Q_UNUSED(settingsCategory);
+    Q_UNUSED(settingsId);
+    Q_UNUSED(parent);
     return false;
 }
 void MainWindow::setWindowTitle(const QString &title)

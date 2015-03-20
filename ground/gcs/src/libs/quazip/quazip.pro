@@ -6,6 +6,8 @@ INCLUDEPATH += ./zlib
 DEFINES += QUAZIP_LIB_LIBRARY
 include(../../taulabslibrary.pri)
 
+QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
+
 HEADERS +=  crypt.h \
             ioapi.h \
                     quazip.h \

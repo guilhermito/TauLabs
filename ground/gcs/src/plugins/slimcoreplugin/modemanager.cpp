@@ -204,7 +204,7 @@ void ModeManager::updateModeNameIcon(IMode *mode, const QIcon &icon, const QStri
 
 void ModeManager::aboutToRemoveObject(QObject *obj)
 {
-
+    Q_UNUSED(obj);
 }
 
 void ModeManager::addAction(Command *command, int priority, QMenu *menu)
