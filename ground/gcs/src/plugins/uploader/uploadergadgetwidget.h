@@ -36,7 +36,7 @@
 #include "devicedescriptorstruct.h"
 #include "uavobjectutilmanager.h"
 #include "uavtalk/telemetrymanager.h"
-#include "slimcoreplugin/connectionmanager.h"
+#include "connectionmanager.h"
 
 using namespace tl_dfu;
 

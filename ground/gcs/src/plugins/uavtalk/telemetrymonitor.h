@@ -41,7 +41,7 @@
 #include "systemstats.h"
 #include "telemetry.h"
 #include "sessionmanaging.h"
-#include "slimcoreplugin/generalsettings.h"
+#include "generalsettings.h"
 #include <extensionsystem/pluginmanager.h>
 
 class TelemetryMonitor : public QObject
