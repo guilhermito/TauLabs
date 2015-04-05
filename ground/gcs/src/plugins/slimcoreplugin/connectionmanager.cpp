@@ -37,7 +37,6 @@
 #include <QHBoxLayout>
 #include <QComboBox>
 #include <QEventLoop>
-#include <alarmsmonitorwidget.h>
 
 namespace Core {
 

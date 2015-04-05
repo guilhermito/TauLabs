@@ -34,8 +34,6 @@
 #include <QWidget>
 #include <QComboBox>
 
-#include <slimcoreplugin/minisplitter.h>
-
 QT_BEGIN_NAMESPACE
 class QSettings;
 class QToolBar;

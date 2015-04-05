@@ -26,49 +26,26 @@ SOURCES += mainwindow.cpp \
     messageoutputwindow.cpp \
     versiondialog.cpp \
     iuavgadget.cpp \
-    uavgadgetmanager/uavgadgetmanager.cpp \
-    uavgadgetmanager/uavgadgetview.cpp \
-    uavgadgetmanager/splitterorview.cpp \
     actionmanager/actionmanager.cpp \
     actionmanager/command.cpp \
     actionmanager/actioncontainer.cpp \
-    actionmanager/commandsfile.cpp \
-    dialogs/settingsdialog.cpp \
-    dialogs/shortcutsettings.cpp \
-    basemode.cpp \
-    baseview.cpp \
     coreplugin.cpp \
     variablemanager.cpp \
     threadmanager.cpp \
-    modemanager.cpp \
     coreimpl.cpp \
     plugindialog.cpp \
-    manhattanstyle.cpp \
-    minisplitter.cpp \
-    styleanimator.cpp \
-    rightpane.cpp \
-    sidebar.cpp \
     mimedatabase.cpp \
     icore.cpp \
-    dialogs/ioptionspage.cpp \
-    dialogs/iwizard.cpp \
     settingsdatabase.cpp \
     eventfilteringmainwindow.cpp \
     iconnection.cpp \
     iuavgadgetconfiguration.cpp \
-    uavgadgetinstancemanager.cpp \
-    uavgadgetoptionspagedecorator.cpp \
-    uavgadgetdecorator.cpp \
-    workspacesettings.cpp \
     uavconfiginfo.cpp \
     authorsdialog.cpp \
-    telemetrymonitorwidget.cpp \
-    dialogs/importsettings.cpp \
     boardmanager.cpp \
     iboardtype.cpp \
     idevice.cpp \
     globalmessaging.cpp \
-    alarmsmonitorwidget.cpp \
     connectionmanager.cpp
 HEADERS += mainwindow.h \
     tabpositionindicator.h \
@@ -78,20 +55,12 @@ HEADERS += mainwindow.h \
     messageoutputwindow.h \
     iuavgadget.h \
     iuavgadgetfactory.h \
-    uavgadgetmanager/uavgadgetmanager.h \
-    uavgadgetmanager/uavgadgetview.h \
-    uavgadgetmanager/splitterorview.h \
     actionmanager/actioncontainer.h \
     actionmanager/actionmanager.h \
     actionmanager/command.h \
     actionmanager/actionmanager_p.h \
     actionmanager/command_p.h \
     actionmanager/actioncontainer_p.h \
-    actionmanager/commandsfile.h \
-    dialogs/settingsdialog.h \
-    dialogs/shortcutsettings.h \
-    dialogs/iwizard.h \
-    dialogs/ioptionspage.h \
     icontext.h \
     icore.h \
     imode.h \
@@ -102,45 +71,27 @@ HEADERS += mainwindow.h \
     icorelistener.h \
     versiondialog.h \
     core_global.h \
-    basemode.h \
-    baseview.h \
     coreplugin.h \
     variablemanager.h \
     threadmanager.h \
-    modemanager.h \
     coreimpl.h \
     plugindialog.h \
-    manhattanstyle.h \
-    minisplitter.h \
-    styleanimator.h \
-    rightpane.h \
-    sidebar.h \
     mimedatabase.h \
     settingsdatabase.h \
     eventfilteringmainwindow.h \
     iconnection.h \
     iuavgadgetconfiguration.h \
-    uavgadgetinstancemanager.h \
-    uavgadgetoptionspagedecorator.h \
-    uavgadgetdecorator.h \
-    workspacesettings.h \
     uavconfiginfo.h \
     authorsdialog.h \
     iconfigurableplugin.h \
-    telemetrymonitorwidget.h \
-    dialogs/importsettings.h \
     boardmanager.h \
     iboardtype.h \
     idevice.h \
     globalmessaging.h \
-    alarmsmonitorwidget.h \
     connectionmanager.h
-FORMS += dialogs/settingsdialog.ui \
-    dialogs/shortcutsettings.ui \
-    generalsettings.ui \
+FORMS += generalsettings.ui \
     uavgadgetoptionspage.ui \
-    workspacesettings.ui \
-    dialogs/importsettings.ui
+    workspacesettings.ui
 RESOURCES += core.qrc
 unix:!macx { 
     images.files = images/taulabs_logo_*.png

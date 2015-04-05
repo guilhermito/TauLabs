@@ -30,11 +30,12 @@
 #ifndef GENERALSETTINGS_H
 #define GENERALSETTINGS_H
 
-#include <slimcoreplugin/dialogs/ioptionspage.h>
 #include <QtCore/QPointer>
 #include <QWidget>
 #include <QSettings>
 #include <QtNetwork/QNetworkProxy>
+#include <QObject>
+#include <coreplugin/core_global.h>
 
 namespace Core {
 namespace Internal {
@@ -43,7 +44,7 @@ namespace Ui {
     class GeneralSettings;
 }
 
-class CORE_EXPORT GeneralSettings : public IOptionsPage
+class CORE_EXPORT GeneralSettings : public QObject
 {
     Q_OBJECT
 
