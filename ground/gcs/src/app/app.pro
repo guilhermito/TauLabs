@@ -6,14 +6,17 @@ TARGET = $$GCS_APP_TARGET
 DESTDIR = $$GCS_APP_PATH
 QT += xml
 QT += widgets
+QT += opengl
 SOURCES += main.cpp \
-    customsplash.cpp
+    customsplash.cpp \
+    mesadownloader.cpp
 
 
 include(../rpath.pri)
 include(../libs/utils/utils.pri)
 
-HEADERS += customsplash.h
+HEADERS += customsplash.h \
+    mesadownloader.h
 
 LIBS *= -l$$qtLibraryName(ExtensionSystem) -l$$qtLibraryName(Aggregation)
 

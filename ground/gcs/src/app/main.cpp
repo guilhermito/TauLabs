@@ -49,9 +49,15 @@
 #include <QMainWindow>
 
 #include <QPixmap>
-#include "customsplash.h"
 #include <QBitmap>
+#include <QGLFormat>
 
+#include "customsplash.h"
+#ifdef Q_OS_WIN
+#ifdef _MSC_VER
+#include "mesadownloader.h"
+#endif
+#endif
 enum { OptionIndent = 4, DescriptionIndent = 24 };
 
 static const char *appNameC = "Tau Labs GCS";
@@ -276,7 +282,24 @@ int main(int argc, char **argv)
     QPixmap pixmap(":/images/resources/tau_trans.png");
     CustomSplash splash(pixmap);
     splash.show();
-
+#ifdef Q_OS_WIN
+#ifdef _MSC_VER
+    splash.showMessage("Checking if the system supports OpenGL2.1");
+    qApp->processEvents();
+    bool openglsupport = ((bool)(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1));
+    if(!openglsupport) {
+        splash.close();
+        if(QMessageBox::question(NULL, "OpenGL 2.1 not supported", "Do you wish to download the Mesa drivers from the internet?") == QMessageBox::Yes) {
+            MesaDownloader *down = new MesaDownloader(&splash);
+            bool ret = down->startDownload();
+            if(ret)
+                return 0;
+            else
+                return -1;
+        }
+    }
+#endif
+#endif
     splash.showMessage("Loading translations",Qt::AlignCenter | Qt::AlignBottom,Qt::black);
     qApp->processEvents();
     const QString &creatorTrPath = QCoreApplication::applicationDirPath()
