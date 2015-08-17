@@ -64,17 +64,17 @@ void UpdaterFactory::onXmlArrive(QNetworkReply *reply)
         qDebug() << "Update Factory xml fetch error:" << reply->errorString();
     if(checkIfCurrentSoftwareNeedsUpdate(currentInfo) && !dontShowSoftwareUpdate) {
         QEventLoop loop;
-        dialog->setup(TBSSplashDialog::TYPE_QUESTION, TBSSplashDialog::BUTTONS_OK | TBSSplashDialog::BUTTONS_CANCEL, "New software version found, do you wish to upgrade now?", false,TBSSplashDialog::BUTTONS_NO_BUTTONS, 0, this, true);
+        dialog->setup(TLSplashDialog::TYPE_QUESTION, TLSplashDialog::BUTTONS_OK | TLSplashDialog::BUTTONS_CANCEL, "New software version found, do you wish to upgrade now?", false,TLSplashDialog::BUTTONS_NO_BUTTONS, 0, this, true);
         dialog->show();
         connect(dialog, SIGNAL(cancelClicked(QObject*)), &loop, SLOT(quit()));
         connect(dialog, SIGNAL(okClicked(QObject*)), &loop, SLOT(quit()));
         loop.exec();
         dialog->close();
-        if(dialog->getLastButtonClicked() & TBSSplashDialog::DONT_SHOW_AGAIN) {
+        if(dialog->getLastButtonClicked() & TLSplashDialog::DONT_SHOW_AGAIN) {
             qDebug()<<"DONTSHOWAFAIN";
             dontShowSoftwareUpdate = true;
         }
-        if(dialog->getLastButtonClicked() & TBSSplashDialog::BUTTONS_CANCEL) {
+        if(dialog->getLastButtonClicked() & TLSplashDialog::BUTTONS_CANCEL) {
             updateTimer.start();
             return;
         }
@@ -84,14 +84,14 @@ void UpdaterFactory::onXmlArrive(QNetworkReply *reply)
         case SOFT_GCS:
             currentStatus = STATUS_DOWNLOADING_FULL_GCS;
             break;
-        case SOFT_TBS_AGENT:
+        case SOFT_TL_AGENT:
             currentStatus = STATUS_DOWNLOADING_AGENT;
             break;
         default:
             break;
         }
         currentStatus = STATUS_DOWNLOADING_AGENT;
-        dialog->setup(TBSSplashDialog::TYPE_WAIT, 0, "Starting Download", false, TBSSplashDialog::BUTTONS_NO_BUTTONS, 0, this, false);
+        dialog->setup(TLSplashDialog::TYPE_WAIT, 0, "Starting Download", false, TLSplashDialog::BUTTONS_NO_BUTTONS, 0, this, false);
         fileDownloader.start(QUrl(currentInfo.common.value(currentSoftwareType).link.toString() + "agent2.txt"));
 
         dialog->show();
@@ -131,7 +131,7 @@ UpdaterFactory::updateInfo UpdaterFactory::processXml(QByteArray xmlArray)
     QDomElement agent = common.firstChildElement("agent");
     if(!agent.isNull())
     {
-        info.common.insert(SOFT_TBS_AGENT, domElementToStruct(agent));
+        info.common.insert(SOFT_TL_AGENT, domElementToStruct(agent));
     }
     QDomElement gcs = common.firstChildElement("gcs");
     if(!gcs.isNull())
@@ -151,7 +151,7 @@ void UpdaterFactory::downloadProgress(qint64 current, qint64 total)
     qDebug()<< current<<total << (current * 100)/total;
     switch (currentStatus) {
     case STATUS_DOWNLOADING_AGENT:
-        dialog->updateText(QString("Downloading TBS agent\nProgress %0%").arg(((current * 100) / total)));
+        dialog->updateText(QString("Downloading Tau Labs agent\nProgress %0%").arg(((current * 100) / total)));
         break;
     case STATUS_DOWNLOADING_FULL_GCS:
         dialog->updateText(QString("Downloading Tau Labs GCS\nProgress %0%").arg(((current * 100) / total)));
@@ -214,13 +214,13 @@ void UpdaterFactory::downloadEnded(bool success)
 UpdaterFactory::UpdaterFactory(QObject *parent):QObject(parent),dontShowSoftwareUpdate(false), currentStatus(STATUS_IDLE)
 {
 #ifdef SLIM_GCS
-    setCurrentSoftwareType(UpdaterFactory::SOFT_TBS_AGENT);
+    setCurrentSoftwareType(UpdaterFactory::SOFT_TL_AGENT);
 #endif
 #ifdef FULL_GCS
     setCurrentSoftwareType(UpdaterFactory::SOFT_GCS);
 #endif
     mainwindow = (Core::Internal::MainWindow*)Core::ICore::instance()->mainWindow();
-    dialog = mainwindow->tbsDialog();
+    dialog = mainwindow->tlDialog();
     manager = new QNetworkAccessManager(this);
     pm=ExtensionSystem::PluginManager::instance();
     Q_ASSERT(pm);
@@ -340,7 +340,7 @@ void UpdaterFactory::splashError(QString text)
 {
     QEventLoop loop;
     connect(dialog, SIGNAL(okClicked(QObject*)), &loop, SLOT(quit()));
-    dialog->setup(TBSSplashDialog::TYPE_ERROR, TBSSplashDialog::BUTTONS_OK,text , false, TBSSplashDialog::BUTTONS_OK, 5, this, false);
+    dialog->setup(TLSplashDialog::TYPE_ERROR, TLSplashDialog::BUTTONS_OK,text , false, TLSplashDialog::BUTTONS_OK, 5, this, false);
     loop.exec();
     dialog->close();
 }

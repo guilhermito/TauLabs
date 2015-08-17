@@ -38,7 +38,7 @@
 #include "extensionsystem/pluginmanager.h"
 #include "icore.h"
 #include "mainwindow.h"
-#include "slimgcs/tbssplashdialog.h"
+#include "slimgcs/tlsplashdialog.h"
 #include "filedownloader.h"
 
 class UPDATER_EXPORT UpdaterFactory : public QObject
@@ -49,7 +49,7 @@ public:
     UpdaterFactory(QObject *parent = 0);
     ~UpdaterFactory();
     enum status {STATUS_IDLE, STATUS_DOWNLOADING_UPDATER, STATUS_DOWNLOADING_INFO, STATUS_DOWNLOADING_AGENT, STATUS_DOWNLOADING_FULL_GCS, STATUS_DOWNLOADING_FW, STATUS_DOWNLOAD_FAIL};
-    enum softType {SOFT_GCS, SOFT_TBS_AGENT, SOFT_UPDATER};
+    enum softType {SOFT_GCS, SOFT_TL_AGENT, SOFT_UPDATER};
     struct softData {
         QString name;
         QUrl link;
@@ -77,7 +77,7 @@ private:
     TelemetryManager *telMngr;
     UAVObjectUtilManager* utilMngr;
     Core::Internal::MainWindow *mainwindow;
-    TBSSplashDialog *dialog;
+    TLSplashDialog *dialog;
     bool backupUVOSettingsFromBoards();
     bool dontShowSoftwareUpdate;
     status currentStatus;
