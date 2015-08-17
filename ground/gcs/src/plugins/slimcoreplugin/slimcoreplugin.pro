@@ -46,7 +46,8 @@ SOURCES += mainwindow.cpp \
     iboardtype.cpp \
     idevice.cpp \
     globalmessaging.cpp \
-    connectionmanager.cpp
+    connectionmanager.cpp \
+    slimgcs/tlsplashdialog.cpp
 HEADERS += mainwindow.h \
     tabpositionindicator.h \
     generalsettings.h \
@@ -88,7 +89,8 @@ HEADERS += mainwindow.h \
     iboardtype.h \
     idevice.h \
     globalmessaging.h \
-    connectionmanager.h
+    connectionmanager.h \
+    slimgcs/tlsplashdialog.h
 FORMS += generalsettings.ui \
     uavgadgetoptionspage.ui \
     workspacesettings.ui
@@ -104,15 +106,13 @@ OTHER_FILES += Core.pluginspec \
 
 HEADERS += slimgcs/windowbutton.h \
     slimgcs/windowtitlebar.h \
-    slimgcs/mainwidget.h \
-    slimgcs/tbssplashdialog.h
+    slimgcs/mainwidget.h
 SOURCES += slimgcs/windowbutton.cpp \
     slimgcs/windowtitlebar.cpp \
-    slimgcs/mainwidget.cpp \
-    slimgcs/tbssplashdialog.cpp
+    slimgcs/mainwidget.cpp
 FORMS += \
     slimgcs/mainwidget.ui \
-    slimgcs/tbssplashdialog.ui
+    slimgcs/tlsplashdialog.ui
 RESOURCES += \
     slimgcs/resource.qrc
 

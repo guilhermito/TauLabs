@@ -104,7 +104,7 @@ MainWindow::MainWindow() :
 
     resize(1000, 700);
 
-    setWindowTitle(tr("TBS Tau Labs Agent"));
+    setWindowTitle(tr("Tau Labs Agent"));
 
     setWindowFlags(Qt::FramelessWindowHint);
 
@@ -128,7 +128,7 @@ MainWindow::MainWindow() :
     dummy->setMaximumWidth(10);
     m_MainLayout.addWidget(dummy,2,0,1,1);
     m_MainLayout.setRowStretch(0, 1); // Put the title bar at the top of the window
-    m_tbsDialog = new TBSSplashDialog();
+    m_tlDialog = new TLSplashDialog();
 }
 
 MainWindow::~MainWindow()
@@ -154,8 +154,8 @@ MainWindow::~MainWindow()
     delete m_coreImpl;
     m_coreImpl = 0;
     delete m_Cache;
-    if(m_tbsDialog)
-        m_tbsDialog->deleteLater();
+    if(m_tlDialog)
+        m_tlDialog->deleteLater();
 }
 
 bool MainWindow::init(QString *errorMessage)

@@ -44,7 +44,7 @@
 #include "slimgcs/mainwidget.h"
 
 #include "slimgcs/windowtitlebar.h"
-#include "slimgcs/tbssplashdialog.h"
+#include "slimgcs/tlsplashdialog.h"
 
 QT_BEGIN_NAMESPACE
 class QSettings;
@@ -107,7 +107,7 @@ public:
     void saveSettings(IConfigurablePlugin* plugin, QSettings* qs = 0){Q_UNUSED(qs);Q_UNUSED(plugin);}
     void deleteSettings(){}
 
-    TBSSplashDialog * tbsDialog(){return m_tbsDialog;}
+    TLSplashDialog * tlDialog(){return m_tlDialog;}
 
     Core::ActionManager *actionManager() const{return NULL;}
     Core::UniqueIDManager *uniqueIDManager() const;
@@ -166,7 +166,7 @@ private:
     AuthorsDialog *m_authorsDialog;
 
     void setWindowTitle(const QString &title);
-    TBSSplashDialog *m_tbsDialog;
+    TLSplashDialog *m_tlDialog;
   signals:
     void WindowTitleChanged();
 
