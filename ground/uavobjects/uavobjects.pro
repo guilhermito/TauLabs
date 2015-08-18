@@ -45,7 +45,6 @@ win32 {
     uavobjects.commands +=   $$targetPath(../../shared/uavobjectdefinition)
     uavobjects.commands +=   $$targetPath(../..) &&
     uavobjects.commands += popd $$addNewline()
-
     uavobjects.commands += pushd $$targetPath(../../ground/gcs) &&
     uavobjects.commands += $(QMAKE) -spec $$SPEC CONFIG+=$${BUILD_CONFIG} -r
     uavobjects.commands +=   $$targetPath(../../../ground/gcs/)gcs.pro &&
@@ -54,14 +53,9 @@ win32 {
 
 !win32 {
     uavobjects.commands += $(MKDIR) -p ../../uavobject-synthetics $$addNewline()
-
     uavobjects.commands += cd ../../uavobject-synthetics &&
     uavobjects.commands += ../ground/uavobjgenerator/uavobjgenerator
-    uavobjects.commands += -gcs -flight -matlab ../../shared/uavobjectdefinition ../.. &&
-
-    uavobjects.commands += cd ../ground/gcs &&
-    uavobjects.commands += $(QMAKE) ../../../ground/gcs/gcs.pro
-    uavobjects.commands += -spec $$SPEC CONFIG+=$${BUILD_CONFIG} -r $$addNewline()
+    uavobjects.commands += -gcs -flight -matlab ../../shared/uavobjectdefinition ../..
 }
 
 uavobjects.target = FORCE
