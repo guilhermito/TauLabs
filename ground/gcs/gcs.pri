@@ -55,37 +55,6 @@ isEmpty(GCS_BUILD_TREE) {
     GCS_BUILD_TREE = $$cleanPath($$OUT_PWD)
     GCS_BUILD_TREE ~= s,$$re_escape($$sub_dir)$,,
 }
-!CONFIG(SLIM_GCS)
-{
-GCS_APP_PATH = $$GCS_BUILD_TREE/bin
-macx {
-    GCS_APP_TARGET   = "Tau Labs GCS"
-    GCS_LIBRARY_PATH = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Plugins
-    GCS_PLUGIN_PATH  = $$GCS_LIBRARY_PATH
-    GCS_LIBEXEC_PATH = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Resources
-    GCS_DATA_PATH    = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Resources
-    GCS_DATA_BASENAME = Resources
-    GCS_DOC_PATH     = $$GCS_DATA_PATH/doc
-    GCS_BIN_PATH     = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/MacOS
-    QMAKE_MACOSX_DEPLOYMENT_TARGET=10.9
-    copydata = 1
-} else {
-    win32 {
-        contains(TEMPLATE, vc.*)|contains(TEMPLATE_PREFIX, vc):vcproj = 1
-        GCS_APP_TARGET   = taulabsgcs
-    } else {
-        GCS_APP_WRAPPER  = taulabsgcs
-        GCS_APP_TARGET   = taulabsgcs.bin
-    }
-    GCS_LIBRARY_PATH = $$GCS_BUILD_TREE/$$GCS_LIBRARY_BASENAME/taulabs
-    GCS_PLUGIN_PATH  = $$GCS_LIBRARY_PATH/plugins
-    GCS_LIBEXEC_PATH = $$GCS_APP_PATH # FIXME
-    GCS_DATA_PATH    = $$GCS_BUILD_TREE/share/taulabs
-    GCS_DATA_BASENAME = share/taulabs
-    GCS_DOC_PATH     = $$GCS_BUILD_TREE/share/doc
-    !isEqual(GCS_SOURCE_TREE, $$GCS_BUILD_TREE):copydata = 1
-}
-}
 
 CONFIG(SLIM_GCS) {
 GCS_BUILD_TREE = $$GCS_BUILD_TREE/../slimgcs
@@ -118,8 +87,36 @@ macx {
     GCS_DOC_PATH     = $$GCS_BUILD_TREE/share/doc
     !isEqual(GCS_SOURCE_TREE, $$GCS_BUILD_TREE):copydata = 1
 }
+} else {
+GCS_APP_PATH = $$GCS_BUILD_TREE/bin
+macx {
+    GCS_APP_TARGET   = "Tau Labs GCS"
+    GCS_LIBRARY_PATH = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Plugins
+    GCS_PLUGIN_PATH  = $$GCS_LIBRARY_PATH
+    GCS_LIBEXEC_PATH = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Resources
+    GCS_DATA_PATH    = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/Resources
+    GCS_DATA_BASENAME = Resources
+    GCS_DOC_PATH     = $$GCS_DATA_PATH/doc
+    GCS_BIN_PATH     = $$GCS_APP_PATH/$${GCS_APP_TARGET}.app/Contents/MacOS
+    QMAKE_MACOSX_DEPLOYMENT_TARGET=10.9
+    copydata = 1
+} else {
+    win32 {
+        contains(TEMPLATE, vc.*)|contains(TEMPLATE_PREFIX, vc):vcproj = 1
+        GCS_APP_TARGET   = taulabsgcs
+    } else {
+        GCS_APP_WRAPPER  = taulabsgcs
+        GCS_APP_TARGET   = taulabsgcs.bin
+    }
+    GCS_LIBRARY_PATH = $$GCS_BUILD_TREE/$$GCS_LIBRARY_BASENAME/taulabs
+    GCS_PLUGIN_PATH  = $$GCS_LIBRARY_PATH/plugins
+    GCS_LIBEXEC_PATH = $$GCS_APP_PATH # FIXME
+    GCS_DATA_PATH    = $$GCS_BUILD_TREE/share/taulabs
+    GCS_DATA_BASENAME = share/taulabs
+    GCS_DOC_PATH     = $$GCS_BUILD_TREE/share/doc
+    !isEqual(GCS_SOURCE_TREE, $$GCS_BUILD_TREE):copydata = 1
 }
-
+}
 DEFINES += GCS_DATA_BASENAME=\\\"$$GCS_DATA_BASENAME\\\"
 
 # Include path to shared API directory
@@ -167,11 +164,10 @@ win32 {
 	# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=52991
 	QMAKE_CXXFLAGS += -mno-ms-bitfields
 }
-SLIM_GCS {
+CONFIG(SLIM_GCS) {
 INCLUDEPATH *= \
     $$GCS_SOURCE_TREE/src/plugins/slimcoreplugin
-}
-!SLIM_GCS {
+} else {
 INCLUDEPATH *= \
     $$GCS_SOURCE_TREE/src/plugins/coreplugin
 }

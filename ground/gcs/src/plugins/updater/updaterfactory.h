@@ -38,7 +38,7 @@
 #include "extensionsystem/pluginmanager.h"
 #include "icore.h"
 #include "mainwindow.h"
-#include "slimgcs/tlsplashdialog.h"
+#include "../slimcoreplugin/slimgcs/tlsplashdialog.h"
 #include "filedownloader.h"
 
 class UPDATER_EXPORT UpdaterFactory : public QObject

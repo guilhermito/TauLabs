@@ -11,11 +11,10 @@ macx {
 
 cache()
 
-SLIM_GCS {
-INCLUDEPATH += $$PWD/../gcs/src/plugins/slimcoreplugin
-}
-!SLIM_GCS {
-INCLUDEPATH += $$PWD/../gcs/src/plugins/coreplugin
+CONFIG(SLIM_GCS) {
+    INCLUDEPATH += $$PWD/../gcs/src/plugins/slimcoreplugin
+} else {
+    INCLUDEPATH += $$PWD/../gcs/src/plugins/coreplugin
 }
 
 TARGET = uavobjgenerator
