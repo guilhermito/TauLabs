@@ -337,4 +337,9 @@ void ConnectionManager::connectionsCallBack()
     disconnect(ExtensionSystem::PluginManager::instance(),SIGNAL(pluginsLoadEnded()),this,SLOT(connectionsCallBack()));
 }
 
+bool ConnectionManager::getAutoconnect()
+{
+    return true;
+}
+
 } //namespace Core

@@ -95,7 +95,7 @@ public:
     bool disconnectDevice();
     void suspendPolling();
     void resumePolling();
-    bool getAutoconnect(){return true;}
+    bool getAutoconnect();
 protected:
     void updateConnectionList(IConnection *connection);
     void registerDevice(IConnection *conn, IDevice *device);
