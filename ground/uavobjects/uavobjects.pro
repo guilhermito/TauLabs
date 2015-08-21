@@ -33,6 +33,9 @@ win32|unix {
     } else {
         BUILD_CONFIG = debug
     }
+    CONFIG(SLIM_GCS) {
+        GCS_CONFIG = SLIM_GCS
+    }
 }
 
 win32 {
@@ -46,7 +49,7 @@ win32 {
     uavobjects.commands +=   $$targetPath(../..) &&
     uavobjects.commands += popd $$addNewline()
     uavobjects.commands += pushd $$targetPath(../../ground/gcs) &&
-    uavobjects.commands += $(QMAKE) -spec $$SPEC CONFIG+=$${BUILD_CONFIG} -r
+    uavobjects.commands += $(QMAKE) -spec $$SPEC CONFIG+=$${BUILD_CONFIG} CONFIG+=$${GCS_CONFIG} -r
     uavobjects.commands +=   $$targetPath(../../../ground/gcs/)gcs.pro &&
     uavobjects.commands += popd $$addNewline()
 }
