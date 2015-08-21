@@ -44,12 +44,12 @@ class CORE_EXPORT TLSplashDialog : public QWidget
 public:
     enum Buttons {
         BUTTONS_NO_BUTTONS = 0,
-        BUTTONS_OK =        0b00000001,
-        BUTTONS_CANCEL =    0b00000010,
-        BUTTONS_NEXT =      0b00000100,
-        BUTTONS_CUSTOM0 =   0b00001000,
-        BUTTONS_CUSTOM1 =   0b00010000,
-        DONT_SHOW_AGAIN =   0b00100000
+        BUTTONS_OK =        0x01,
+        BUTTONS_CANCEL =    0x02,
+        BUTTONS_NEXT =      0x04,
+        BUTTONS_CUSTOM0 =   0x08,
+        BUTTONS_CUSTOM1 =   0x10,
+        DONT_SHOW_AGAIN =   0x20
     };
     enum DialogType {
         TYPE_WAIT,
