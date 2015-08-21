@@ -197,11 +197,10 @@ bool MainWindow::showOptionsDialog(const QString &category,
                                    const QString &page,
                                    QWidget *parent)
 {
-    emit m_coreImpl->optionsDialogRequested();
-    if (!parent)
-        parent = this;
-    //SettingsDialog dlg(parent, category, page);
-   // return dlg.execDialog();
+    Q_UNUSED(category)
+    Q_UNUSED(page)
+    Q_UNUSED(parent)
+    return false;
 }
 
 void MainWindow::showHelp()
