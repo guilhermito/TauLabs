@@ -3,14 +3,14 @@ TARGET = Uploader
 DEFINES += UPLOADER_LIBRARY
 QT += svg widgets
 
-SLIM_GCS {
+CONFIG(SLIM_GCS) {
 INCLUDEPATH+=../slimcoreplugin
-}
-!SLIM_GCS {
+} else {
 INCLUDEPATH+=../coreplugin
 }
 include(uploader_dependencies.pri)
 include(../../libs/quazip/quazip.pri)
+
 HEADERS += uploadergadget.h \
     uploadergadgetfactory.h \
     uploadergadgetwidget.h \
